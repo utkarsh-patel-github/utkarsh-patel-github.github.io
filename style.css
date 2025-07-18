@@ -127,11 +127,34 @@ main {
   padding-top: var(--space-8);
 }
 
+/* Enhanced animations and modern UI improvements */
+
+/* Improved hero section */
 .hero-section {
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
   padding-bottom: var(--space-10);
+  background: linear-gradient(135deg, var(--bg-color) 0%, rgba(66, 133, 244, 0.02) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(66, 133, 244, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(234, 67, 53, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
 }
 
 /* Hero content with gradient text and animations */
@@ -198,13 +221,15 @@ main {
   filter: blur(20px);
 }
 
+/* Enhanced search bar with glassmorphism */
 .hero-section .search-bar {
   display: flex;
   align-items: center;
-  background-color: var(--card-bg);
-  border-radius: var(--radius-lg);
-  padding: var(--space-2) var(--space-4);
-  box-shadow: var(--shadow-elevated);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   transition: var(--transition);
   border: 1px solid rgba(0, 0, 0, 0.05);
   overflow: hidden;
@@ -239,8 +264,9 @@ main {
   opacity: 0.8;
 }
 
+/* Improved button animations */
 .hero-section .search-bar button {
-  background: linear-gradient(135deg, var(--primary-blue), #1a73e8);
+  background: linear-gradient(135deg, var(--primary-blue) 0%, #1a73e8 100%);
   color: white;
   border: none;
   border-radius: var(--radius-lg);
@@ -261,12 +287,11 @@ main {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
+  left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transform: translateX(-100%);
-  transition: var(--transition);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.3s ease;
 }
 
 .hero-section .search-bar button:hover {
@@ -275,7 +300,7 @@ main {
 }
 
 .hero-section .search-bar button:hover::before {
-  transform: translateX(100%);
+  left: 100%;
 }
 
 .hero-section .search-bar button i {
@@ -296,18 +321,22 @@ main {
   pointer-events: none;
 }
 
+/* Enhanced keyword buttons */
 .hero-section .keywords button {
   display: flex;
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-full);
-  background: var(--card-bg);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   color: var(--text-color);
   font-size: 0.9rem;
   font-weight: 500;
   cursor: default;
-  transition: none;
   opacity: 0.9;
   border: 1px solid var(--border-color);
 }
@@ -442,9 +471,12 @@ main {
   margin-bottom: var(--space-6);
 }
 
+/* Enhanced tool cards with modern glassmorphism effect */
 .hero-section .highlited-tools .tool {
-  background-color: var(--card-bg);
-  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: var(--space-6);
   display: flex;
   flex-direction: column;
@@ -460,13 +492,12 @@ main {
 .hero-section .highlited-tools .tool::before {
   content: '';
   position: absolute;
+  top: 0;
+  left: -100%;
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
-  background: linear-gradient(135deg, rgba(66, 133, 244, 0.05), transparent);
-  z-index: -1;
-  transition: var(--transition);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
 }
 
 .hero-section .highlited-tools .tool:hover {
@@ -475,7 +506,7 @@ main {
 }
 
 .hero-section .highlited-tools .tool:hover::before {
-  opacity: 0.8;
+  left: 100%;
 }
 
 .hero-section .highlited-tools .tool .tool-icon {
@@ -1448,6 +1479,120 @@ footer::after {
 
 .all-tools a:hover{
   color: var(--primary-light-color);
+}
+
+/* Enhanced focus states for accessibility */
+button:focus-visible,
+.icon-button:focus-visible,
+.theme-toggle:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Improve button hover and active states */
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Add reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Improve contrast for dark mode */
+.dark-mode .tool {
+  border: 1px solid var(--border-color);
+}
+
+.dark-mode .search-bar input {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.dark-mode .search-bar input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Enhanced keyboard navigation for tool cards */
+.tool:focus-within {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
+}
+
+/* Improve visibility of interactive elements */
+.keywords button {
+  position: relative;
+  transition: var(--transition);
+}
+
+.keywords button:hover {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, #1a73e8 100%);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(66, 133, 244, 0.3);
+}
+
+.keywords button:focus-visible {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
+}
+
+/* Floating animation for tool badges */
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.tool-badge {
+  animation: floating 3s ease-in-out infinite;
+  animation-delay: calc(var(--badge-delay, 0) * 0.5s);
+}
+
+/* Enhanced loading states */
+.tool {
+  position: relative;
+}
+
+.tool.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 

@@ -14,14 +14,35 @@ async function initConverter() {
 
 // Fetch exchange rates from API
 async function updateExchangeRates() {
+    const loadingElement = document.querySelector('.loading-indicator');
+    if (loadingElement) loadingElement.style.display = 'block';
+    
     try {
         const response = await fetch(API_URL + 'USD');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
+        
+        if (!data || !data.rates) {
+            throw new Error('Invalid API response format');
+        }
+        
         exchangeRates = data.rates;
         lastUpdateTime = new Date();
         updateLastUpdated();
+        
+        // Show success message
+        showNotification('Exchange rates updated successfully!', 'success');
+        
     } catch (error) {
         console.error('Error fetching exchange rates:', error);
+        
+        // Show user-friendly error message
+        showNotification('Unable to fetch current exchange rates. Using offline data.', 'warning');
+        
         // Fallback to some default rates if API fails
         exchangeRates = {
             USD: 1,
@@ -34,6 +55,11 @@ async function updateExchangeRates() {
             CNY: 6.45,
             INR: 75.0
         };
+        
+        lastUpdateTime = new Date('2024-01-01'); // Indicate old data
+        updateLastUpdated();
+    } finally {
+        if (loadingElement) loadingElement.style.display = 'none';
     }
 }
 
@@ -100,6 +126,23 @@ function swapCurrencies() {
     toAmount.value = tempAmount;
     
     convert();
+}
+
+// Show notification to user
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <i class="ri-${type === 'success' ? 'check' : type === 'warning' ? 'alert' : 'information'}-line"></i>
+        <span>${message}</span>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Remove after 5 seconds
+    setTimeout(() => {
+        notification.remove();
+    }, 5000);
 }
 
 // Update exchange rates every hour

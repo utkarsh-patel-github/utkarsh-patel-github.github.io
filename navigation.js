@@ -36,17 +36,32 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.contains('show');
             navLinks.classList.toggle('show');
             menuToggle.classList.toggle('active');
+            
+            // Update ARIA attributes for accessibility
+            menuToggle.setAttribute('aria-expanded', !isOpen);
+            navLinks.setAttribute('aria-hidden', isOpen);
             
             // Change icon between menu and close
             const icon = menuToggle.querySelector('i');
             if (navLinks.classList.contains('show')) {
                 icon.classList.remove('ri-menu-line');
                 icon.classList.add('ri-close-line');
+                menuToggle.setAttribute('aria-label', 'Close menu');
             } else {
                 icon.classList.remove('ri-close-line');
                 icon.classList.add('ri-menu-line');
+                menuToggle.setAttribute('aria-label', 'Open menu');
+            }
+        });
+        
+        // Add keyboard support for mobile menu
+        menuToggle.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                menuToggle.click();
             }
         });
         
@@ -58,9 +73,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 navLinks.classList.remove('show');
                 menuToggle.classList.remove('active');
                 
+                // Update ARIA attributes
+                menuToggle.setAttribute('aria-expanded', 'false');
+                navLinks.setAttribute('aria-hidden', 'true');
+                
                 const icon = menuToggle.querySelector('i');
                 icon.classList.remove('ri-close-line');
                 icon.classList.add('ri-menu-line');
+                menuToggle.setAttribute('aria-label', 'Open menu');
             }
         });
         
@@ -70,11 +90,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 navLinks.classList.remove('show');
                 menuToggle.classList.remove('active');
                 
+                // Update ARIA attributes
+                menuToggle.setAttribute('aria-expanded', 'false');
+                navLinks.setAttribute('aria-hidden', 'true');
+                
                 const icon = menuToggle.querySelector('i');
                 icon.classList.remove('ri-close-line');
                 icon.classList.add('ri-menu-line');
+                menuToggle.setAttribute('aria-label', 'Open menu');
             }
         });
+        
+        // Initialize ARIA attributes
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open menu');
+        navLinks.setAttribute('aria-hidden', 'true');
     }
     
     // Add active class to current nav link

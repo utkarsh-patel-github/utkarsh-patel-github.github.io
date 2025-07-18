@@ -179,9 +179,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const keywordButtons = document.querySelectorAll('.keywords button');
     keywordButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const keyword = button.textContent.trim().split(' ').slice(1).join(' ');
+            // Grab the visible text of the button (ignores icon) & normalise spaces
+            const keyword = button.innerText.replace(/\s+/g, ' ').trim();
             searchInput.value = keyword;
-            performSearch();
+
+            // Use the enhanced search on the homepage, otherwise fallback
+            if (window.location.pathname === '/' || window.location.pathname.endsWith('index.html')) {
+                enhancedHomepageSearch();
+            } else {
+                performSearch();
+            }
         });
     });
     

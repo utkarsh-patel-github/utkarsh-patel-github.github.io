@@ -123,17 +123,17 @@
             <div class="search-container">
                 <div class="search-bar">
                     <i class="ri-search-line search-icon"></i>
-                    <input type="text" placeholder="Search for a tool">
-                    <button><span>Search</span> <i class="ri-arrow-right-up-line"></i></button>
+                    <input type="text" placeholder="Search for a tool" aria-label="Search for tools" role="searchbox">
+                    <button aria-label="Submit search"><span>Search</span> <i class="ri-arrow-right-up-line"></i></button>
                 </div>
 
-                <div class="keywords">
-                    <button><i class="ri-cake-fill"></i> Age Calculator</button>
-                    <button><i class="ri-file-text-fill"></i> Word Counter</button>
-                    <button><i class="ri-calendar-fill"></i> Calendar</button>
-                    <button><i class="ri-key-fill"></i> Password Generator</button>
-                    <button><i class="ri-divide-fill"></i> Prime Factor</button>
-                    <button><i class="ri-hashtag"></i> Roman Converter</button>
+                <div class="keywords" role="group" aria-label="Quick tool shortcuts">
+                    <button aria-label="Open Age Calculator tool"><i class="ri-cake-fill"></i> Age Calculator</button>
+                    <button aria-label="Open Word Counter tool"><i class="ri-file-text-fill"></i> Word Counter</button>
+                    <button aria-label="Open Calendar tool"><i class="ri-calendar-fill"></i> Calendar</button>
+                    <button aria-label="Open Password Generator tool"><i class="ri-key-fill"></i> Password Generator</button>
+                    <button aria-label="Open Prime Factor Calculator tool"><i class="ri-divide-fill"></i> Prime Factor</button>
+                    <button aria-label="Open Roman Converter tool"><i class="ri-hashtag"></i> Roman Converter</button>
                 </div>
             </div>  
 
@@ -278,15 +278,15 @@
                 
                 <div class="tool blue-theme">
                     <div class="tool-icon">
-                        <i class="ri-palette-fill"></i>
-                        <h3>Color Converter</h3>
+                        <i class="ri-shield-keyhole-fill"></i>
+                        <h3>Password Generator</h3>
                         <span class="tool-badge">New</span>
                     </div>
                     <div class="tool-description">
-                        <p>Convert colors between different formats like HEX, RGB, HSL, and more. Essential for web design and digital art.</p>
+                        <p>Generate secure, random passwords with customizable length and character sets. Essential for online security and privacy.</p>
                     </div>
                     <div class="tool-link">
-                        <a href="tools/color-converter/index.html"><button id="color-converter-btn">Try Now <i class="ri-arrow-right-line"></i></button></a>
+                        <a href="tools/password-generator/index.html"><button id="password-generator-btn">Try Now <i class="ri-arrow-right-line"></i></button></a>
                     </div>
                 </div>
             </div>
